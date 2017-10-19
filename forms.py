@@ -6,8 +6,17 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 def date_format(form, field):
-    if not datetime.strptime(field.data, '%m/%d/%Y'):
+    try:
+        datetime.strptime(field.data, '%m/%d/%Y')
+    except ValueError:
         raise ValidationError('Date format is NOT correct.')
+
+
+def num_checker(form, field):
+    try:
+        float(field.data)
+    except ValueError:
+        raise ValidationError('This field must contain ONLY numbers.')
 
 
 class AddEntryForm(FlaskForm):
@@ -25,8 +34,8 @@ class AddEntryForm(FlaskForm):
     time_spent = StringField(
         'Time Spent (MINS):',
         validators=[
-            DataRequired()
-            # int_checker
+            DataRequired(),
+            num_checker
         ])
     learned = TextAreaField(
         "What I Learned:",
