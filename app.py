@@ -27,6 +27,7 @@ def after_request(response):
     g.db.close()
     return response
 
+
 # Needs two routes
 @app.route('/entry', methods=['GET', 'POST'])
 def add_edit():
@@ -45,9 +46,14 @@ def add_edit():
 
 @app.route('/')
 @app.route('/entries')
-def index():
-    entries = models.Entry.select().limit(100)
-    return render_template('index.html', entries=entries)
+@app.route('/entries/<entry_id>')
+def index(entry_id=None):
+    if entry_id:
+        entry = models.Entry.get(models.Entry.id == entry_id)
+        return render_template('detail.html', entry=entry)
+    else:
+        entries = models.Entry.select().limit(100)
+        return render_template('index.html', entries=entries)
 
 
 if __name__ == "__main__":
