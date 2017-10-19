@@ -7,8 +7,8 @@
         <link href="https://fonts.googleapis.com/css?family=Cousine:400" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Work+Sans:600" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="static/css/normalize.css">
-        <link rel="stylesheet" href="static/css/site.css">
+        <link rel="stylesheet" href="/static/css/normalize.css">
+        <link rel="stylesheet" href="/static/css/site.css">
     </head>
     <body>
         <header>
@@ -26,8 +26,8 @@
                     {% if entries %}
                         {% for entry in entries %}
                             <article>
-                                <h2><a href="detail.html">{{ entry.title }}</a></h2>
-                                <time datetime="{{ entry.date }}">{{ entry.date }}</time> <!-- add .strftime('%B %d, %Y') in -->
+                                <h2><a href="{{ url_for('index', entry_id=entry.id) }}">{{ entry.title }}</a></h2>
+                                <time datetime="{{ entry.date }}">{{ entry.date }}</time> 
                             </article>
                         {% endfor %}
                     {% else %}
