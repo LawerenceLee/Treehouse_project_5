@@ -1,5 +1,3 @@
-import datetime as dt
-
 from flask import (Flask, render_template, url_for, g,
                    flash, redirect)
 
