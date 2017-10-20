@@ -31,7 +31,7 @@ def after_request(response):
 # Needs two routes
 @app.route('/entry', methods=['GET', 'POST'])
 def add_edit():
-    form = forms.AddEntryForm()
+    form = forms.AddEditEntryForm()
     if form.validate_on_submit():
         models.Entry.create(
             title=form.title.data.strip(),
@@ -51,7 +51,24 @@ def add_edit():
 def index(entry_id=None, edit_id=None):
     if edit_id:
         entry = models.Entry.get(models.Entry.id == edit_id)
-        return render_template('edit.html', entry=entry)
+        form = forms.AddEditEntryForm()
+        if form.validate_on_submit():
+            models.Entry.update(
+                title=form.title.data.strip(),
+                date=form.date.data.strip(),
+                time_spent=form.time_spent.data.strip(),
+                learned=form.learned.data.strip(),
+                resources=form.resources.data.strip()
+                ).where(models.Entry.id == edit_id
+                ).execute()
+            flash("Entry Updated!", 'success')
+            return redirect(url_for('index'))
+        form.title.data = entry.title
+        form.date.data = entry.date
+        form.time_spent.data = entry.time_spent
+        form.learned.data = entry.learned
+        form.resources.data = entry.resources
+        return render_template('edit.html', form=form)
     elif entry_id:
         entry = models.Entry.get(models.Entry.id == entry_id)
         return render_template('detail.html', entry=entry)
