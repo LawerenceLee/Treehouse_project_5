@@ -1,3 +1,6 @@
+{% from 'macros.html' import render_field %}
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,20 +26,27 @@
             <div class="container">
                 <div class="edit-entry">
                     <h2>Edit Entry</h2>
-                    <form>
-                        <label for="title"> Title</label>
-                        <input id="title" type="text" name="title" value="{{ entry.title }}"><br>
-                        <label for="date">Date</label>
-                        <input id="date" type="date" name="date" value="{{ entry.date }}"><br>
-                        <label for="time-spent"> Time Spent</label>
-                        <input id="time-spent" type="text" name="timeSpent" value="{{ entry.time_spent }}"><br>
-                        <label for="what-i-learned">What I Learned</label>
-                        <textarea id="what-i-learned" rows="5" name="whatILearned">{{ entry.learned }}</textarea>
-                        <label for="resources-to-remember">Resources to Remember</label>
-                        <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember">{{ entry.resources }}</textarea>
-                        <input type="submit" value="Publish Entry" class="button">
-                        <a href="#" class="button button-secondary">Cancel</a>
-                    </form>
+                    <form method='POST', action=''>
+                        {{ form.hidden_tag() }}
+                        <div>
+                            <div>
+                            {{ render_field(form.title) }}
+                            </div>
+                            <div>
+                                {{ render_field(form.date) }}
+                            </div>
+                            <div>
+                                {{ render_field(form.time_spent) }}
+                            </div>
+                            <div>
+                                {{ render_field(form.learned) }}
+                            </div>
+                            <div>
+                                {{ render_field(form.resources) }}
+                            </div>
+                            <input type="submit" value="Publish Entry" class="button">
+                            <a href="#" class="button button-secondary">Cancel</a>
+                        </form>
                 </div>
             </div>
         </section>
