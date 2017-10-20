@@ -30,7 +30,7 @@ def after_request(response):
 
 # Needs two routes
 @app.route('/entry', methods=['GET', 'POST'])
-@app.route('/entry/edit/<edit_id>', methods=['GET', 'POST'])
+@app.route('/entries/edit/<edit_id>', methods=['GET', 'POST'])
 def add_edit(edit_id=None):
     if edit_id:
         entry = models.Entry.get(models.Entry.id == edit_id)
@@ -51,8 +51,8 @@ def add_edit(edit_id=None):
         form.time_spent.data = entry.time_spent
         form.learned.data = entry.learned
         form.resources.data = entry.resources
-        return render_template('edit.html', form=form)  
-    else:  
+        return render_template('edit.html', form=form)
+    else:
         form = forms.AddEditEntryForm()
         if form.validate_on_submit():
             models.Entry.create(
@@ -66,16 +66,23 @@ def add_edit(edit_id=None):
         return render_template('new.html', form=form)
 
 
+@app.route('/entries/<entry_id>')
+def detail(entry_id):
+    entry = models.Entry.get(models.Entry.id == entry_id)
+    return render_template('detail.html', entry=entry)
+
+
+@app.route('/entries/delete/<entry_id>')
+def delete(entry_id=None):
+    models.Entry.get(models.Entry.id == entry_id).delete_instance()
+    return redirect(url_for('index'))
+
+
 @app.route('/')
 @app.route('/entries')
-@app.route('/entries/<entry_id>')
 def index(entry_id=None):
-    if entry_id:
-        entry = models.Entry.get(models.Entry.id == entry_id)
-        return render_template('detail.html', entry=entry)
-    else:
-        entries = models.Entry.select().limit(100)
-        return render_template('index.html', entries=entries)
+    entries = models.Entry.select().limit(100)
+    return render_template('index.html', entries=entries)
 
 
 if __name__ == "__main__":
