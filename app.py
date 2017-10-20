@@ -47,8 +47,12 @@ def add_edit():
 @app.route('/')
 @app.route('/entries')
 @app.route('/entries/<entry_id>')
-def index(entry_id=None):
-    if entry_id:
+@app.route('/entries/edit/<edit_id>', methods=['GET', 'POST'])
+def index(entry_id=None, edit_id=None):
+    if edit_id:
+        entry = models.Entry.get(models.Entry.id == edit_id)
+        return render_template('edit.html', entry=entry)
+    elif entry_id:
         entry = models.Entry.get(models.Entry.id == entry_id)
         return render_template('detail.html', entry=entry)
     else:
