@@ -205,7 +205,11 @@ form input[type=text],
 form input[type=password],
 form input[type=date],
 form textarea,
-.form_element {
+.element input[type=text],
+.element input[type=password],
+.element input[type=date],
+.element textarea
+{
 	border: 2px solid #e1e1e1;
 	font-size: 18px;
 	line-height: 1.8em;
@@ -217,23 +221,35 @@ form textarea,
 form input[type=text]:focus,
 form input[type=date]:focus,
 form input[type=password]:focus,
-form textarea:focus
-.form_element:focus {
+form textarea:focus,
+.element input[type=text]:focus,
+.element input[type=password]:focus,
+.element input[type=date]:focus,
+.element textarea:focus
+{
 	outline: 0;
 	border-color: #678f89;
 }
 form input[type=text]:hover,
-form input[type=date]:hover
-form textarea:hover
-.form_element:hover {
+form input[type=date]:hover,
+form textarea:hover,
+.element input[type=text]:hover,
+.element input[type=date]:hover,
+.element textarea:hover
+{
 	border-color: #678f89;
 }
 .edit-entry form textarea,
-.new-entry form textarea {
+.new-entry form textarea
+{
 	min-height: 200px;
 }
 input[type=submit] {
 	margin-right: 5px;
+}
+
+.element textarea {
+	/* border: none; */
 }
 
 
