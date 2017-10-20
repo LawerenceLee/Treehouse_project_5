@@ -19,7 +19,7 @@ def num_checker(form, field):
         raise ValidationError('This field must contain ONLY numbers.')
 
 
-class AddEntryForm(FlaskForm):
+class AddEditEntryForm(FlaskForm):
     title = StringField(
         'Entry Title:',
         validators=[
