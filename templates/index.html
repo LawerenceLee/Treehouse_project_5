@@ -26,29 +26,13 @@
                     {% if entries %}
                         {% for entry in entries %}
                             <article>
-                                <h2><a href="{{ url_for('index', entry_id=entry.id) }}">{{ entry.title }}</a></h2>
+                                <h2><a href="{{ url_for('detail', entry_id=entry.id) }}">{{ entry.title }}</a></h2>
                                 <time datetime="{{ entry.date }}">{{ entry.date }}</time> 
                             </article>
                         {% endfor %}
                     {% else %}
                         <p>No Entries Yet</p>
                     {% endif %}
-                    <!-- <article>
-                        <h2><a href="detail.html">The best day I’ve ever had</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article>
-                    <article>
-                        <h2><a href="detail_2.html">The absolute worst day I’ve ever had</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article>
-                    <article>
-                        <h2><a href="detail_3.html">That time at the mall</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article>
-                    <article>
-                        <h2><a href="detail_4.html">Dude, where’s my car?</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article> -->
                 </div>
             </div>
         </section>
