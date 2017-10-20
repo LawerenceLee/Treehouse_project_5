@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Cousine:400" rel="stylesheet"type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:600" rel="stylesheet"type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/normalize.css">
-    <link rel="stylesheet" href="static/css/site.css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/site.css">
   </head>
     <body>
       <header>
@@ -26,27 +26,15 @@
           <div class="new-entry">
             <h2>New Entry</h2>
             <form method='POST' action=''>
-              {{ form.hidden_tag() }}
-              <div>
-                <div>
-                  {{ render_field(form.title) }}
-                </div>
-                <div>
-                    {{ render_field(form.date) }}
-                </div>
-                <div>
-                  {{ render_field(form.time_spent) }}
-                </div>
-                <div>
-                  {{ render_field(form.learned) }}
-                </div>
-                <div>
-                  {{ render_field(form.resources) }}
-                </div>
-                <div>
-                  <input type="submit" value="Publish Entry" class="button">
-                  <a href="#" class="button button-secondary">Cancel</a>
-                </div>
+              <div>{{ form.hidden_tag() }}</div>
+              <div class='element'>{{ render_field(form.title) }}</div>
+              <div class='element'>{{ render_field(form.date) }}</div>         
+              <div class='element'>{{ render_field(form.time_spent) }}</div>   
+              <div class='element'>{{ render_field(form.learned) }}</div>      
+              <div class='element'>{{ render_field(form.resources) }}</div>
+              <input type="submit" value="Publish Entry" class="button">
+              <a href="{{ url_for('index') }}" class="button button-secondary">Cancel</a>
+            </form>
           </div>
         </div>
       </section>
