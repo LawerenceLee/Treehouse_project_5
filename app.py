@@ -30,25 +30,8 @@ def after_request(response):
 
 # Needs two routes
 @app.route('/entry', methods=['GET', 'POST'])
-def add_edit():
-    form = forms.AddEditEntryForm()
-    if form.validate_on_submit():
-        models.Entry.create(
-            title=form.title.data.strip(),
-            date=form.date.data.strip(),
-            time_spent=form.time_spent.data,
-            learned=form.learned.data.strip(),
-            resources=form.resources.data.strip())
-        flash("Entry Added!", 'success')
-        return redirect(url_for('index'))
-    return render_template('new.html', form=form)
-
-
-@app.route('/')
-@app.route('/entries')
-@app.route('/entries/<entry_id>')
-@app.route('/entries/edit/<edit_id>', methods=['GET', 'POST'])
-def index(entry_id=None, edit_id=None):
+@app.route('/entry/edit/<edit_id>', methods=['GET', 'POST'])
+def add_edit(edit_id=None):
     if edit_id:
         entry = models.Entry.get(models.Entry.id == edit_id)
         form = forms.AddEditEntryForm()
@@ -60,7 +43,7 @@ def index(entry_id=None, edit_id=None):
                 learned=form.learned.data.strip(),
                 resources=form.resources.data.strip()
                 ).where(models.Entry.id == edit_id
-                ).execute()
+                        ).execute()
             flash("Entry Updated!", 'success')
             return redirect(url_for('index'))
         form.title.data = entry.title
@@ -68,8 +51,26 @@ def index(entry_id=None, edit_id=None):
         form.time_spent.data = entry.time_spent
         form.learned.data = entry.learned
         form.resources.data = entry.resources
-        return render_template('edit.html', form=form)
-    elif entry_id:
+        return render_template('edit.html', form=form)  
+    else:  
+        form = forms.AddEditEntryForm()
+        if form.validate_on_submit():
+            models.Entry.create(
+                title=form.title.data.strip(),
+                date=form.date.data.strip(),
+                time_spent=form.time_spent.data,
+                learned=form.learned.data.strip(),
+                resources=form.resources.data.strip())
+            flash("Entry Added!", 'success')
+            return redirect(url_for('index'))
+        return render_template('new.html', form=form)
+
+
+@app.route('/')
+@app.route('/entries')
+@app.route('/entries/<entry_id>')
+def index(entry_id=None):
+    if entry_id:
         entry = models.Entry.get(models.Entry.id == entry_id)
         return render_template('detail.html', entry=entry)
     else:
