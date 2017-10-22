@@ -1,11 +1,13 @@
 from datetime import datetime
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField
+from wtforms import StringField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired, ValidationError
 
 
 def date_format(form, field):
+    '''Acts as a validator for the date field in the
+    AddEditForm Class'''
     try:
         datetime.strptime(field.data, '%m/%d/%Y')
     except ValueError:
@@ -13,6 +15,8 @@ def date_format(form, field):
 
 
 def num_checker(form, field):
+    '''Acts as a validator for the time_spent field in the
+    AddEditForm Class'''
     try:
         float(field.data)
     except ValueError:
@@ -47,3 +51,19 @@ class AddEditEntryForm(FlaskForm):
         validators=[
             DataRequired()
         ])
+    tags = StringField(
+        "Tags (seperate each with a comma):"
+        )
+
+
+class LoginForm(FlaskForm):
+    username = StringField(
+        'Username',
+        validators=[
+            DataRequired()
+            ])
+    password = PasswordField(
+        'Password',
+        validators=[
+            DataRequired()
+            ])
