@@ -1,5 +1,5 @@
 {% macro render_field(field) %}
-
+<!-- start macro -->
 <label>{{ field.label }}</label>
 {% if field.errors %}
 <div>
@@ -11,4 +11,14 @@
 </div>
 {% endif %}
 {{ field() }}
+<!-- end macro -->
+{% endmacro %}
+
+
+{% macro render_tags(tags) %}
+<!-- start macro -->
+{% for tag in tags.split(',') %}
+    <p class='tag-inline'><a href="{{ url_for('index', tag=tag) }}">{{ tag }}</a></p>
+{% endfor %}
+<!-- end macro -->
 {% endmacro %}
