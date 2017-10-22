@@ -9,6 +9,7 @@ class Entry(Model):
     time_spent = IntegerField()
     learned = TextField()
     resources = TextField()
+    slug = CharField(max_length=100)
 
     class Meta:
         database = DATABASE
