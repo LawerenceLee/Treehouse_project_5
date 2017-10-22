@@ -26,7 +26,7 @@
                     {% if entries %}
                         {% for entry in entries %}
                             <article>
-                                <h2><a href="{{ url_for('detail', entry_id=entry.id) }}">{{ entry.title }}</a></h2>
+                                <h2><a href="{{ url_for('detail', slug=entry.slug) }}">{{ entry.title }}</a></h2>
                                 <time datetime="{{ entry.date }}">{{ entry.date }}</time> 
                             </article>
                         {% endfor %}
