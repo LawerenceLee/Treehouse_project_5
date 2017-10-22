@@ -9,6 +9,7 @@ body {
 	color: #404a49;
 	font-family: 'Cousine', serif;
 	font-weight: 400;
+
 }
 .container {
 	margin: 0 auto;
@@ -34,6 +35,29 @@ footer {
 	border-top: 2px dotted #678f89;
 }
 
+.tag-inline {
+	display: inline;
+}
+
+.tag-list {
+	margin-top: 20px;
+}
+
+.notification {
+	margin-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+	border-bottom: 1px solid black;
+	font-size: 20px;
+}
+
+.notification.success {
+	color: #678f89;
+}
+
+.notification.error {
+	color: red;
+}
 
 
 
@@ -60,6 +84,7 @@ footer {
 .button.icon-right {
 	padding-right: 30px;
 	top: -10px;
+	margin-left: 5px;
 }
 .button.icon-left {
 	padding-left: 30px;
